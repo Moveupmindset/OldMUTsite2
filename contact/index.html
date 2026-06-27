@@ -192,7 +192,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <p class="has-text-align-center">or send a message here:</p>
 
 
-<div class="contact-form-container"><form id="contact-form" class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact/?submitted=true"><input type="hidden" name="form-name" value="contact"><input type="hidden" name="subject" value="New Move Up Tutoring inquiry from %{formName}"><div class="contact-form-row"><p class="contact-form-field contact-form-half"><label for="contact-name-first">First Name <span class="required">*</span></label><input type="text" id="contact-name-first" name="name_first" required></p><p class="contact-form-field contact-form-half"><label for="contact-name-last">Last Name <span class="required">*</span></label><input type="text" id="contact-name-last" name="name_last" required></p></div><p class="contact-form-field"><label for="contact-phone">Your Phone Number <span class="required">*</span></label><input type="tel" id="contact-phone" name="phone" required></p><p class="contact-form-field"><label for="contact-email">Your Email Address <span class="required">*</span></label><input type="email" id="contact-email" name="email" spellcheck="false" required></p><p class="contact-form-field"><label for="contact-message">Message <span class="required">*</span></label><textarea id="contact-message" name="message" required></textarea></p><p class="contact-form-field" style="position:absolute;left:-9999px;" aria-hidden="true"><label for="contact-bot-field">Leave this field blank if you are human</label><input type="text" name="bot-field" id="contact-bot-field" tabindex="-1" autocomplete="off"></p><p class="contact-form-submit"><button type="submit" data-alt-text="Sending..." data-submit-text="Submit">Submit</button></p></form></div>
+<div class="contact-form-container"><form id="contact-form" class="contact-form" name="contact" method="POST" action="https://formspree.io/f/xojzbabk"><input type="hidden" name="_subject" value="New Move Up Tutoring inquiry"><div class="contact-form-row"><p class="contact-form-field contact-form-half"><label for="contact-name-first">First Name <span class="required">*</span></label><input type="text" id="contact-name-first" name="name_first" required></p><p class="contact-form-field contact-form-half"><label for="contact-name-last">Last Name <span class="required">*</span></label><input type="text" id="contact-name-last" name="name_last" required></p></div><p class="contact-form-field"><label for="contact-phone">Your Phone Number <span class="required">*</span></label><input type="tel" id="contact-phone" name="phone" required></p><p class="contact-form-field"><label for="contact-email">Your Email Address <span class="required">*</span></label><input type="email" id="contact-email" name="email" spellcheck="false" required></p><p class="contact-form-field"><label for="contact-message">Message <span class="required">*</span></label><textarea id="contact-message" name="message" required></textarea></p><p class="contact-form-field" style="position:absolute;left:-9999px;" aria-hidden="true"><label for="contact-bot-field">Leave this field blank if you are human</label><input type="text" name="_gotcha" id="contact-bot-field" tabindex="-1" autocomplete="off"></p><p class="contact-form-submit"><button type="submit" data-alt-text="Sending..." data-submit-text="Submit">Submit</button></p></form></div>
 
 
 
@@ -246,10 +246,10 @@ var twentyseventeenScreenReaderText = {"quote":"\u003Csvg class=\"icon icon-quot
 		e.preventDefault();
 		var btn = form.querySelector('button[type="submit"]');
 		if (btn) { btn.disabled = true; btn.textContent = btn.getAttribute('data-alt-text') || 'Sending...'; }
-		fetch('/', {
+		fetch(form.action, {
 			method: 'POST',
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: new URLSearchParams(new FormData(form)).toString()
+			headers: { 'Accept': 'application/json' },
+			body: new FormData(form)
 		}).then(function (res) {
 			if (!res.ok) throw new Error('Request failed');
 			var done = document.createElement('div');
